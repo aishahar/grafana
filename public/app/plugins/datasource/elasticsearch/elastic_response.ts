@@ -30,7 +30,7 @@ export class ElasticResponse {
 
       switch (metric.type) {
         case 'count': {
-          newSeries = { datapoints: [], metric: 'count', props: props };
+          newSeries = { datapoints: [], metric: 'count', props: props, refId: target.refId };
           for (i = 0; i < esAgg.buckets.length; i++) {
             bucket = esAgg.buckets[i];
             value = bucket.doc_count;
@@ -76,6 +76,7 @@ export class ElasticResponse {
               metric: statName,
               props: props,
               field: metric.field,
+              refId: target.refId,
             };
 
             for (i = 0; i < esAgg.buckets.length; i++) {
@@ -101,6 +102,7 @@ export class ElasticResponse {
             field: metric.field,
             metricId: metric.id,
             props: props,
+            refId: target.refId,
           };
           for (i = 0; i < esAgg.buckets.length; i++) {
             bucket = esAgg.buckets[i];
